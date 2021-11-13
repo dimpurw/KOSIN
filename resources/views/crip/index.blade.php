@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.master')
 
 @section('content')
     <div class="container">
@@ -16,7 +16,7 @@
                                 @endforeach
                             </select>
                         </div>
-                        <div class="float-right">
+                        <div class="ml-2 float-right">
                             <a href="{{route('crip.tambah')}}" class="btn btn-success">Tambah</a>
                         </div>
                         </form>

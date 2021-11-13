@@ -1,20 +1,15 @@
-@extends('layouts.app')
+@extends('layouts.master')
 
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">Dashboard</div>
+                <div class="card-header">APAKAH ANDA TAHU ???</div>
 
                 <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success">
-                            {{ session('status') }}
-                        </div>
-                    @endif
-
-                    You are logged in!
+                    <h3>Ingin Membandingkan Kualitas KOS-KOSAN ?</h3>
+                    <p>ROBOARDING siap membantu anda Membandingkan Kosan Terbaik dengan Perangkingan.</p>
                 </div>
             </div>
         </div>
