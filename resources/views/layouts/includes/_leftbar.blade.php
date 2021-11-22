@@ -50,10 +50,6 @@
         <div id="kriteria" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
             <a class="collapse-item" href="{{route('kriteria')}}">Kriteria</a>
-          </div>
-        </div>
-        <div id="kriteria" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
-          <div class="bg-white py-2 collapse-inner rounded">
             <a class="collapse-item" href="{{route('crip')}}">Nilai Crips</a>
           </div>
         </div>
@@ -65,10 +61,6 @@
         <div id="alternatif" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
             <a class="collapse-item" href="{{route('alternatif')}}">Alternatif</a>
-          </div>
-        </div>
-        <div id="alternatif" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
-          <div class="bg-white py-2 collapse-inner rounded">
             <a class="collapse-item" href="{{route('nilai')}}">Nilai Alternatif</a>
           </div>
         </div>

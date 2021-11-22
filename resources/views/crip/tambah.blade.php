@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.master')
 
 @section('content')
     <div class="container">
@@ -24,7 +24,7 @@
                                     </select>
                                 </div>
                                 <div class="form-group">
-                                    <label for="nama_crip">Nama <span class="text-danger">*</span></label>
+                                    <label for="nama_crip">Keterangan Crips <span class="text-danger">*</span></label>
                                     <input type="text" name="nama_crip" class="form-control">
                                 </div>
                                 <div class="form-group">
