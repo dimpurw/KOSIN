@@ -70,6 +70,11 @@
           <i class="fas fa fa-user"></i>
           <span>Perhitungan</span></a>
       </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{{route('perangkingan')}}">
+          <i class="fas fa fa-user"></i>
+          <span>Perangkingan</span></a>
+      </li>
  
       <!-- Nav Item - Utilities Collapse Menu pengguna-->
       <!-- <li class="nav-item">

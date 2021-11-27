@@ -18,6 +18,8 @@ Route::get('/', function () {
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/perhitungan','PerhitunganController@index')->name('perhitungan');
+Route::get('/perangkingan','PerhitunganController@indeks')->name('perangkingan');
+
 //Route module for kriteria
 Route::prefix('/kriteria')->group(function ()
 {

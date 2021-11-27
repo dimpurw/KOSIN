@@ -3,7 +3,7 @@
 @section('content')
     <div class="container">
     <div class="row justify-content-center">
-            <div class="col-md-12 card-deck">
+            <div class="col-md-12 card-deck" style="display: none;">
                 <div class="card">
                     <div class="card-header">
                         <h3 class="float-left">Hasil Analisa</h3>
@@ -71,7 +71,7 @@
                 </div>
             </div>
 
-            <div class="col-md-12 card-deck mt-4">
+            <div class="col-md-12 card-deck mt-4" style="display: none;">
                 <div class="card">
                     <div class="card-header">
                         <h3 class="float-left">Normalisasi</h3>
@@ -124,10 +124,10 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-12 card-deck mt-4" style="display: none;">
+            <div class="col-md-12 card-deck mt-4">
                 <div class="card">
                     <div class="card-header">
-                        <h3>Ranking</h3>
+                        <h3>PERANGKINGAN</h3>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
