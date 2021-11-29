@@ -137,7 +137,7 @@
                                         <th>Kode</th>
                                         <th>Nama</th>
                                         <th>Total</th>
-                                        <th>Ranking</th>
+                                        <th>Rangking</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -145,16 +145,23 @@
                                 <?php
                                 $columns = array_column($rangking, 'total');
                                 array_multisort($columns, SORT_DESC, $rangking);
-                                $a = 1;
+                                $i = 1;
+                                foreach($rangking as $key=>$values)
+                                {
+                                    echo "<tr>";
+                                    $max = max($columns);
+                                    echo "<td>" . $values['kode'] . "</td>";
+                                    echo "<td>" . $values['nama'] . "</td>";
+                                    echo "<td>" . $max . "</td>";
+                                    echo "<td>" . $i . "</td>";
+                                    $keys = array_search($max, $columns);    
+                                    unset($columns[$keys]);
+                                    if(sizeof($columns) >0)
+                                    if(!in_array($max,$columns))
+                                        $i++;
+                                    echo "</tr>";
+                                }
                                 ?>
-                                    @foreach($rangking as $t)
-                                        <tr>
-                                            <td>{{$t['kode']}}</td>
-                                            <td>{{$t['nama']}}</td>
-                                            <td>{{$t['total']}}</td>
-                                            <td>{{$a++}}</td>
-                                        </tr>
-                                    @endforeach
                                 </tbody>
                             </table>
                         </div>
