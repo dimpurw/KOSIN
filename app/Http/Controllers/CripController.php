@@ -18,11 +18,10 @@ class CripController extends Controller
     {
         $kriteria   = Kriteria::all();
         $crips      = collect([]);
-        if ($req->k)
-        {
+        if ($req->k) {
             $crips = Kriteria::find($req->k)->crip;
         }
-        return view('crip.index',[
+        return view('crip.index', [
             'kriteria'  => $kriteria,
             'crips'     => $crips,
         ]);
@@ -36,7 +35,7 @@ class CripController extends Controller
     public function create()
     {
         $kriteria = Kriteria::all();
-        return view('crip.tambah',['kriteria' => $kriteria]);
+        return view('crip.tambah', ['kriteria' => $kriteria]);
     }
 
     /**
@@ -47,15 +46,29 @@ class CripController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validator($request->all())->validate();
+        $this->validate(
+            $request,
+            [
+                'kriteria' => ['required'],
+                'nama_crip' => ['required', 'max:100'],
+                'nilai_crip' => ['required', 'numeric'],
+            ],
+            [
+                'kriteria.required' => 'Harap isi bidang ini',
+                'nilai_crip.required' => 'Harap isi bidang ini',
+                'nama_crip.required' => 'Harap isi bidang ini',
+                'nama_crip.max' => 'Maksimal harus 50 karakter',
+                'nilai_crip.numeric' => 'Harap Berisikan Nomor',
+            ]
+        );
         $kriteria = Kriteria::find($request->kriteria);
-        $saveCrip = $kriteria->crip()->create($request->except(['_token','kriteria']));
-        if (!$saveCrip)
-        {
+        $saveCrip = $kriteria->crip()->create($request->except(['_token', 'kriteria']));
+        if (!$saveCrip) {
             return back();
         }
         return redirect(route('crip'));
     }
+
 
     /**
      * Display the specified resource.
@@ -78,7 +91,7 @@ class CripController extends Controller
     {
         $kriteria   = Kriteria::all();
         $crip       = Crip::find($id);
-        return view('crip.edit',[
+        return view('crip.edit', [
             'kriteria'  => $kriteria,
             'crip'     => $crip,
         ]);
@@ -93,16 +106,31 @@ class CripController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $this->validate(
+            $request,
+            [
+                'kriteria' => ['required'],
+                'nama_crip' => ['required', 'max:100'],
+                'nilai_crip' => ['required', 'numeric'],
+            ],
+            [
+                'kriteria.required' => 'Harap isi bidang ini',
+                'nilai_crip.required' => 'Harap isi bidang ini',
+                'nama_crip.required' => 'Harap isi bidang ini',
+                'nama_crip.max' => 'Maksimal harus 50 karakter',
+                'nilai_crip.numeric' => 'Harap Berisikan Nomor',
+            ]
+        );
         $krit = Kriteria::find((int) $request->kriteria);
         $crip = Crip::find($id);
-        $updated = $crip->update($request->except(['_token','kriteria']));
-        if ($updated)
-        {
+        $updated = $crip->update($request->except(['_token', 'kriteria']));
+        if ($updated) {
             $crip->kriteria()->associate($krit)->save();
-            return redirect(route('crip')."?k=".$request->kriteria);
+            return redirect(route('crip') . "?k=" . $request->kriteria);
         }
         return back();
     }
+
 
     /**
      * Remove the specified resource from storage.
@@ -118,7 +146,7 @@ class CripController extends Controller
 
     private function validator(array $data)
     {
-        return Validator::make($data,[
+        return Validator::make($data, [
             'kriteria'      => 'required',
             'nama_crip'     => 'required',
             'nilai_crip'    => 'required'

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use App\Kriteria;
+
 class KriteriaController extends Controller
 {
     /**
@@ -15,8 +16,8 @@ class KriteriaController extends Controller
     public function index(Request $req)
     {
         $data = Kriteria::all();
-//        return response()->json($data);
-        return view('kriteria.index',['kriteria' => $data]);
+        //        return response()->json($data);
+        return view('kriteria.index', ['kriteria' => $data]);
     }
 
     /**
@@ -37,7 +38,26 @@ class KriteriaController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validator($request->all())->validate();
+        $this->validate(
+            $request,
+            [
+                'kode' => ['required', 'max:10'],
+                'nama' => ['required', 'max:50'],
+                'atribut' => ['required'],
+                'bobot' => ['required', 'numeric'],
+            ],
+            [
+
+
+                'atribut.required' => 'Harap isi bidang ini',
+                'kode.required' => 'Harap isi bidang ini',
+                'kode.max' => 'Maksimal harus 5 karakter',
+                'bobot.required' => 'Harap isi bidang ini',
+                'nama.required' => 'Harap isi bidang ini',
+                'nama.max' => 'Maksimal harus 50 karakter',
+                'bobot.numeric' => 'Harap Berisikan Nomor',
+            ]
+        );
         $saveKriteria = Kriteria::create($request->all());
         if (!$saveKriteria) {
             return back();
@@ -65,7 +85,7 @@ class KriteriaController extends Controller
     public function edit($id)
     {
         $kriteria = Kriteria::find($id);
-        return view('kriteria.edit',['data' => $kriteria]);
+        return view('kriteria.edit', ['data' => $kriteria]);
     }
 
     /**
@@ -77,8 +97,30 @@ class KriteriaController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $updateData = Kriteria::where('id',$id)
-                        ->update($request->except('_token'));
+        $this->validate(
+            $request,
+            [
+                'kode' => ['required', 'max:10'],
+                'nama' => ['required', 'max:50'],
+                'atribut' => ['required'],
+                'bobot' => ['required', 'numeric'],
+
+
+            ],
+            [
+
+
+                'atribut.required' => 'Harap isi bidang ini',
+                'kode.required' => 'Harap isi bidang ini',
+                'kode.max' => 'Maksimal harus 5 karakter',
+                'bobot.required' => 'Harap isi bidang ini',
+                'nama.required' => 'Harap isi bidang ini',
+                'nama.max' => 'Maksimal harus 50 karakter',
+                'bobot.numeric' => 'Harap Berisikan Nomor',
+            ]
+        );
+        $updateData = Kriteria::where('id', $id)
+            ->update($request->except('_token'));
         if (!$updateData) {
             return back();
         }
@@ -99,7 +141,7 @@ class KriteriaController extends Controller
 
     private function validator(array $data)
     {
-        return Validator::make($data,[
+        return Validator::make($data, [
             'kode'      => 'required|unique:kriteria',
             'nama'      => 'required',
             'atribut'   => 'required',

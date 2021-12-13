@@ -37,12 +37,24 @@ class AlternatifController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validator($request->all())->validate();
+        $this->validate(
+            $request,
+            [
+                'kode_alternatif' => ['required', 'max:10'],
+                'nama_alternatif' => ['required', 'max:100'],
+            ],
+            [
+                'kode_alternatif.required' => 'Harap isi bidang ini',
+                'nama_alternatif.required' => 'Harap isi bidang ini',
+                'kode_alternatif.max' => 'Maksimal harus 10 karakter',
+                'nama_alternatif.max' => 'Maksimal harus 100 karakter',
+            ]
+        );
         $saveAlternatif = Alternatif::create($request->all())->id;
         if (!$saveAlternatif) {
             return back();
         }
-        return redirect(route('nilai.tambah',['id' => $saveAlternatif]));
+        return redirect(route('nilai.tambah', ['id' => $saveAlternatif]));
     }
 
     /**
@@ -65,7 +77,7 @@ class AlternatifController extends Controller
     public function edit($id)
     {
         $alternatif = Alternatif::find($id);
-        return view('alternatif.edit',['alternatif' => $alternatif]);
+        return view('alternatif.edit', ['alternatif' => $alternatif]);
     }
 
     /**
@@ -77,8 +89,21 @@ class AlternatifController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $updateAlternatif = Alternatif::where('id',$id)
-                ->update($request->except(['_token']));
+        $this->validate(
+            $request,
+            [
+                'kode_alternatif' => ['required', 'max:10'],
+                'nama_alternatif' => ['required', 'max:100'],
+            ],
+            [
+                'kode_alternatif.required' => 'Harap isi bidang ini',
+                'nama_alternatif.required' => 'Harap isi bidang ini',
+                'kode_alternatif.max' => 'Maksimal harus 10 karakter',
+                'nama_alternatif.max' => 'Maksimal harus 100 karakter',
+            ]
+        );
+        $updateAlternatif = Alternatif::where('id', $id)
+            ->update($request->except(['_token']));
         if (!$updateAlternatif) {
             return back();
         }
@@ -99,7 +124,7 @@ class AlternatifController extends Controller
 
     private function validator(array $data)
     {
-        return Validator::make($data,[
+        return Validator::make($data, [
             'kode_alternatif' => 'required',
             'nama_alternatif' => 'required',
         ]);
